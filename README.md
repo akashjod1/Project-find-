@@ -1,2 +1,16 @@
 # Project-find-
 Good for community 
+services:
+  api:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    env_file:
+      - .env
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT:-development} # Default to development if not set
+    restart: unless-stopped
